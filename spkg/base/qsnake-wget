@@ -1,0 +1,11 @@
+#! /bin/sh
+
+# Multiplatform wget emulation
+
+if [ `uname` = 'Darwin' ]; then
+    WGET="curl -O"
+else
+    WGET="wget -nc"
+fi
+
+$WGET $@

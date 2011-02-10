@@ -1,0 +1,6 @@
+# This script gets executed using "/bin/bash --rcfile qsnake-shell-rc" when you
+# do "./qsnake --shell", so that the prompt gets changed.
+
+. $HOME/.bashrc
+. $SPKG_LOCAL/bin/qsnake-env
+PS1="Qsnake: "$PS1

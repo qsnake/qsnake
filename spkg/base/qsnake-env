@@ -1,0 +1,221 @@
+#!/usr/bin/env bash
+
+###########################################################################
+#
+#  Set environment variables for building and/or running SAGE.
+#  You must source this; see below!
+# 
+#  AUTHORS:   William Stein                            2005-12
+#             David Kirkby <david.kirkby@onetel.net>   2005-12-17
+#  Edited by  hp-FEM group, University of Nevada, Reno
+###########################################################################
+
+##########################################################################
+#
+#  If you want to set all environment variables for your shell like
+#  they are during the build of SPKG packages, type 
+#
+#             source local/bin/qsnake-env 
+#
+#  from the QSNAKE_ROOT directory.   To do the same from a /bin/bash
+#  script use ". local/bin/qsnake-env". 
+# 
+##########################################################################
+
+if [ "$QSNAKE_ROOT" = "" ]; then
+    echo "QSNAKE_ROOT must be set"
+    exit 1
+fi
+
+# Setting SAGE-related location environment variables.
+BUILD=build
+SAGE_ROOT="$QSNAKE_ROOT"        && export SAGE_ROOT
+SAGE_PACKAGES="$SAGE_ROOT/spkg" && export SAGE_PACKAGES
+SAGE_LOCAL="$SAGE_ROOT/local"   && export SAGE_LOCAL
+SAGE_DATA="$SAGE_ROOT/data"     && export SAGE_DATA
+SAGE_DOC="$SAGE_ROOT/devel/sage/doc" && export SAGE_DOC
+PATH="$SAGE_ROOT:$SAGE_LOCAL/bin:$PATH" && export PATH
+
+# Setting project neutral envrironment variables for Qsnake
+SPKG_PACKAGES="$QSNAKE_ROOT/spkg" && export SPKG_PACKAGES
+SPKG_LOCAL="$QSNAKE_ROOT/local"   && export SPKG_LOCAL
+SPKG_DATA="$QSNAKE_ROOT/data"     && export SPKG_DATA
+SPKG_DOC="$QSNAKE_ROOT/devel/sage/doc" && export SPKG_DOC
+
+# Mac OS X-specific setup
+if [ `uname` = "Darwin" ]; then
+    # For a framework Python build on OS X, Python's bin directory is not local/bin
+    PATH="$SAGE_LOCAL/Frameworks/Python.framework/Versions/2.5/bin:$PATH" && export PATH
+
+    # set MACOSX_DEPLOYMENT_TARGET -- if set incorrectly, this can
+    # cause lots of random "Abort trap" issues on OSX. see trac
+    # #7095 for an example.
+    MACOSX_VERSION=`uname -r | awk -F. '{print $1}'`
+    MACOSX_DEPLOYMENT_TARGET=10.$[$MACOSX_VERSION-4]
+    export MACOSX_DEPLOYMENT_TARGET
+fi
+
+if [ "$LIBRARY_PATH" != "" ]; then
+    LIBRARY_PATH="$SAGE_LOCAL/lib/:$LIBRARY_PATH"
+else
+    LIBRARY_PATH="$SAGE_LOCAL/lib/"
+fi
+export LIBRARY_PATH
+
+GP_DATA_DIR="$SAGE_LOCAL/share/pari" && export GP_DATA_DIR
+GPHELP="$SAGE_LOCAL/bin/gphelp" && export GPHELP
+GPDOCDIR="$SAGE_LOCAL/share/pari/doc" && export GPDOCDIR
+
+SINGULARPATH="$SAGE_LOCAL/share/singular" && export SINGULARPATH
+
+if [ "$SAGE_SERVER" = "" ]; then
+    SAGE_SERVER="http://www.qsnake.org/"
+    export SAGE_SERVER
+fi
+
+if [ "$DOT_SAGE" = "" ]; then
+    DOT_SAGE="$HOME/.qsnake/"
+    export DOT_SAGE
+fi
+
+if [ "$SAGE_STARTUP_FILE" = "" ]; then
+    SAGE_STARTUP_FILE="$DOT_SAGE/init.sage"
+    export SAGE_STARTUP_FILE
+fi
+
+if [ -d "$SAGE_ROOT/local/lib/python" ]; then
+    PYTHONPATH="$SAGE_PATH:$SAGE_ROOT/local/lib/python"   && export PYTHONPATH
+    PYTHONHOME="$SAGE_ROOT/local" && export PYTHONHOME
+fi
+
+if [ -z "${SAGE_ORIG_LD_LIBRARY_PATH_SET}" ]; then
+    SAGE_ORIG_LD_LIBRARY_PATH=$LD_LIBRARY_PATH && export SAGE_ORIG_LD_LIBRARY_PATH
+    SAGE_ORIG_LD_LIBRARY_PATH_SET=True && export SAGE_ORIG_LD_LIBRARY_PATH_SET
+fi
+
+if [ -z "$SAGE_TESTDIR" ]; then
+    SAGE_TESTDIR="$SAGE_ROOT"/tmp && export SAGE_TESTDIR
+fi
+
+LD_LIBRARY_PATH="$SAGE_ROOT/local/lib/:$LD_LIBRARY_PATH" && export LD_LIBRARY_PATH
+# The following is needed for openmpi:
+LD_LIBRARY_PATH="$SAGE_ROOT/local/lib/openmpi:$LD_LIBRARY_PATH" && export LD_LIBRARY_PATH
+# The following is needed for OS X (especially for the
+# Singular install).
+if [ `uname` = "Darwin" ]; then
+    if [ -z "${SAGE_ORIG_DYLD_LIBRARY_PATH_SET}" ]; then
+        SAGE_ORIG_DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH && export SAGE_ORIG_DYLD_LIBRARY_PATH
+        SAGE_ORIG_DYLD_LIBRARY_PATH_SET=True && export SAGE_ORIG_DYLD_LIBRARY_PATH_SET
+    fi
+    DYLD_LIBRARY_PATH="$LD_LIBRARY_PATH:$DYLD_LIBRARY_PATH:$SAGE_LOCAL/lib/R/lib" && export DYLD_LIBRARY_PATH
+fi
+
+if [ "$1" = "-short" ]; then
+    exit 0
+fi
+
+if [ -z "$RHOME" ]; then
+    RHOME="$SAGE_LOCAL/lib/R" && export RHOME
+fi
+
+
+############ compilation flags
+
+# Setting SAGE-related compilation flags.
+# This could be used in code to make special changes only when
+# code is being built as part of SAGE.
+__sage__="" && export __sage__
+# Set the default compiler to gcc if the enviroment variable 
+# CC is not set. 
+if [ "$CC" = "" ]; then
+     CC="gcc"         && export CC
+fi
+ # Set the default C++ compiler to g++ if the environment variable
+# CXX is not set. 
+if [ "$CXX" = "" ]; then
+    CXX="g++"         && export CXX
+fi
+
+if [ "$LD" = "" ]; then
+    LD="ld"  && export LD
+fi
+if [ "$AR" = "" ]; then
+    AR="ar"  && export AR
+fi
+if [ "$AS" = "" ]; then
+    AS="as"  && export AS
+fi
+
+UNAME=`uname`
+if [ `uname | sed -e 's/WIN.\+/WIN/'` = "CYGWIN" ]; then
+    UNAME="CYGWIN"
+fi
+
+if [ "$LDFLAGS" = "" ]; then
+    LDFLAGS=""          && export LDFLAGS
+fi
+
+if [ "$SAGE64" = "" ]; then
+    SAGE64="no"
+fi 
+
+if [ "$SAGE64" != "yes" -a "$SAGE64" != "no" ]; then
+    echo "The environment variable SAGE64 (=$SAGE64) must be either unset, yes or no."
+    exit 1
+fi
+
+# In case SAGE64 has been set to yes before re-inject it into the environment
+# This is only done on OSX and Solaris since those are the only real multi lib
+# arches we support. Eventually Linux PPC on the PS3 might need to be added here
+source $SAGE_LOCAL/bin/sage-check-64 2> /dev/null
+export SAGE64
+
+if [ "$CXXFLAGS" = "" ]; then
+   CXXFLAGS="$CFLAGS"
+fi
+
+if [ "$CP" = "" ]; then
+    CP="cp"  && export CP
+fi
+
+if [ "$MV" = "" ]; then
+    MV="mv"  && export MV
+fi
+
+if [ "$MAKE" = "" ]; then
+    MAKE="make"         && export MAKE
+fi
+
+if [ "$RM" = "" ]; then
+    RM="rm"  && export RM
+fi
+ 
+if [ "$RANLIB" = "" ]; then
+    RANLIB="ranlib"  && export RANLIB
+fi
+ 
+if [ "$LN" = "" ]; then
+    LN="ln"  && export LN
+fi
+ 
+if [ "$MKDIR" = "" ]; then
+    MKDIR="mkdir"  && export MKDIR
+fi
+ 
+if [ "$CHMOD" = "" ]; then
+    CHMOD="chmod"  && export CHMOD
+fi
+ 
+if [ "$TOUCH" = "" ]; then
+    TOUCH="touch"  && export TOUCH
+fi
+
+if [ "$MAKEFLAGS" != "" ]; then
+    MFLAGS="$MAKEFLAGS"  && export MFLAGS
+fi
+
+# Export variable names. 
+export SHAREDFLAGS
+export UNAME
+export CC
+export CFLAGS
