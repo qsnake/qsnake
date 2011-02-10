@@ -4,6 +4,26 @@ Qsnake
 Qsnake is an open source distribution of scientific codes with a unified Python
 interface.
 
+Installation
+------------
+
+Download the git repository::
+
+    git clone https://github.com/qsnake/qsnake.git
+    cd qsnake
+
+Download external packages and install minimal qsnake::
+
+    ./qsnake -d
+    ./qsnake install ipython
+
+Run qsnake::
+
+    ./qsnake
+
+You can install other packages, for example numpy, by doing ``qsnake install
+numpy``.
+
 License
 -------
 
