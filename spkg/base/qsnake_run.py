@@ -397,6 +397,9 @@ def install_package(pkg, install_dependencies=True, force_install=False,
     install_package_spkg(pkg)
     cmd("touch $QSNAKE_ROOT/spkg/installed/%s" % pkg_make_relative(pkg))
 
+    print
+    print "Package '%s' installed." % pkg_make_relative(pkg)
+
     if remote:
         from shutil import rmtree
         rmtree(tmpdir)
