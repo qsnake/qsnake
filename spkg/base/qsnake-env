@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
 if [ "$QSNAKE_ROOT" = "" ]; then
     echo "QSNAKE_ROOT must be set"
     exit 1
