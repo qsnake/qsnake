@@ -2,5 +2,5 @@
 # do "./qsnake --shell", so that the prompt gets changed.
 
 . $HOME/.bashrc
-. $SPKG_LOCAL/bin/qsnake-env
+. $QSNAKE_ROOT/local/bin/qsnake-env
 PS1="Qsnake: "$PS1
