@@ -8,7 +8,8 @@ fi
 # Setting project neutral envrironment variables
 export SPKG_LOCAL="$QSNAKE_ROOT/local"
 export PATH="$QSNAKE_ROOT:$SPKG_LOCAL/bin:$PATH"
-export LD_LIBRARY_PATH="$SPKG_LOCAL/lib/:$LIBRARY_PATH"
+export LIBRARY_PATH="$SPKG_LOCAL/lib/:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="$SPKG_LOCAL/lib/:$LD_LIBRARY_PATH"
 export PYTHONPATH="$SPKG_LOCAL/lib/python"
 export PYTHONHOME="$SPKG_LOCAL"
 
