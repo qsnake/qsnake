@@ -472,6 +472,7 @@ def get_dependencies(pkg):
             "python": ["termcap", "zlib", "readline", "bzip2", "gnutls",
                 "libpng"],
             "ipython": ["python"],
+            "libpng": ["zlib"],
             "cython": ["python"],
             "sympy": ["python"],
             "lapack": ["fortran"],
