@@ -97,7 +97,8 @@ Only use this mode to install Qsnake.
                 install_package(arg2, cpu_count=options.cpu_count,
                         force_install=options.force)
             except PackageBuildFailed:
-                print "Package build failed"
+                print
+                print "Package build failed."
             return
         print "Unknown command"
         sys.exit(1)
@@ -337,8 +338,10 @@ def install_package_spkg(pkg):
             cmd("cd $QSNAKE_ROOT/spkg/build; tar xf %s" % pkg)
     name, version = extract_name_version_from_path(pkg)
     cmd("cd $QSNAKE_ROOT/spkg/build/%s-%s; chmod +x spkg-install" % (name, version))
-    cmd("cd $QSNAKE_ROOT/spkg/build/%s-%s; . $QSNAKE_ROOT/local/bin/qsnake-env; ./spkg-install" % (name, version))
-    #raise PackageBuildFailed()
+    try:
+        cmd("cd $QSNAKE_ROOT/spkg/build/%s-%s; . $QSNAKE_ROOT/local/bin/qsnake-env; ./spkg-install" % (name, version))
+    except CmdException:
+        raise PackageBuildFailed()
 
 def install_package(pkg, install_dependencies=True, force_install=False,
         cpu_count=0):
@@ -640,6 +643,7 @@ def build(cpu_count=0):
         print
         print "Finished building Qsnake."
     except PackageBuildFailed:
+        print
         print "Qsnake build failed."
 
 def wait_for_ctrl_c():
