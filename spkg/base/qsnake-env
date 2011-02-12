@@ -8,10 +8,17 @@ fi
 # Setting project neutral envrironment variables
 export SPKG_LOCAL="$QSNAKE_ROOT/local"
 export PATH="$QSNAKE_ROOT:$SPKG_LOCAL/bin:$PATH"
-export LIBRARY_PATH="$SPKG_LOCAL/lib/:$LIBRARY_PATH"
 export LD_LIBRARY_PATH="$SPKG_LOCAL/lib/:$LD_LIBRARY_PATH"
 export PYTHONPATH="$SPKG_LOCAL/lib/python"
 export PYTHONHOME="$SPKG_LOCAL"
+if [ "$LIBRARY_PATH" = "" ]; then
+    # It is important to *not* have ":" at the end of the path, otherwise gcc
+    # fails to run properly:
+    # gcc: ./specs: Is a directory
+    export LIBRARY_PATH="$SPKG_LOCAL/lib/"
+else
+    export LIBRARY_PATH="$SPKG_LOCAL/lib/:$LIBRARY_PATH"
+fi
 
 
 # Setting Sage-related location environment variables.
