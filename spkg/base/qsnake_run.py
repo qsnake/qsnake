@@ -623,7 +623,6 @@ def build(cpu_count=0):
     packages_list = [
             "ipython",
             "hermes1d",
-            "hermes2d",
             # requires: setupdocs>=1.0, doesn't work without a net...
             "mayavi",
             "phaml",
