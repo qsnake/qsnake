@@ -9,8 +9,6 @@ fi
 export SPKG_LOCAL="$QSNAKE_ROOT/local"
 export PATH="$QSNAKE_ROOT:$SPKG_LOCAL/bin:$PATH"
 export LD_LIBRARY_PATH="$SPKG_LOCAL/lib/:$LD_LIBRARY_PATH"
-export PYTHONPATH="$SPKG_LOCAL/lib/python"
-export PYTHONHOME="$SPKG_LOCAL"
 if [ "$LIBRARY_PATH" = "" ]; then
     # It is important to *not* have ":" at the end of the path, otherwise gcc
     # fails to run properly:
@@ -19,6 +17,13 @@ if [ "$LIBRARY_PATH" = "" ]; then
 else
     export LIBRARY_PATH="$SPKG_LOCAL/lib/:$LIBRARY_PATH"
 fi
+
+# Setup Python:
+export PYTHONPATH="$SPKG_LOCAL/lib/python"
+export PYTHONHOME="$SPKG_LOCAL"
+
+# Needed for "pkg-config":
+export PKG_CONFIG_PATH="$SPKG_LOCAL/lib/pkgconfig/"
 
 
 # Setting Sage-related location environment variables.
