@@ -31,3 +31,10 @@ Everything in the Qsnake git repository is BSD licensed (see the LICENSE file).
 Individual packages, that are downloaded externally, can have other licenses.
 Depending on what packages you install, you should consult their licenses to
 make sure that you comply with them.
+
+Related Software
+----------------
+
+Qsnake should be compatible with `Sage <http://sagemath.org/>`_, the
+buildsystem is rewritten from scratch, and it is BSD licensed, but the format
+of the packages is exactly the same as in Sage.
