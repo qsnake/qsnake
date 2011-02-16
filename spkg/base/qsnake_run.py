@@ -223,6 +223,7 @@ def create_package(package):
         "cython":         "git://github.com/hpfem/cython.git",
         "hermes2d":       "git://github.com/hpfem/hermes.git",
         "elk":            "git://github.com/qsnake/elk.git",
+        "libqsnake":      "git://github.com/qsnake/libqsnake.git",
             }
     if package not in packages:
         raise Exception("Unknown package")
