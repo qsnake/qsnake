@@ -222,6 +222,7 @@ def create_package(package):
         "mesheditorflex": "git://github.com/hpfem/mesheditor-flex.git",
         "cython":         "git://github.com/hpfem/cython.git",
         "hermes2d":       "git://github.com/hpfem/hermes.git",
+        "elk":            "git://github.com/qsnake/elk.git",
             }
     if package not in packages:
         raise Exception("Unknown package")
