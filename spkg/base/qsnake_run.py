@@ -516,6 +516,7 @@ def get_dependencies(pkg):
             "proteus": ["numpy", "cython"],
             "phaml": ["blas", "lapack", "cmake", "numpy", "arpack"],
             "umfpack": ["blas"],
+            "jinja2": ["setuptools"],
             }
     deps = []
     for dep in dependency_graph.get(pkg_name, []):
