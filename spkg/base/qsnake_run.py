@@ -325,6 +325,9 @@ def download_packages():
     for p in packages:
         cmd("cd $QSNAKE_ROOT/spkg/standard; ../base/qsnake-wget %s" % p)
 
+    # FIXME: Special case, it should be handled in some general way:
+    cmd("cd $QSNAKE_ROOT/spkg/standard; qsnake --create-package libqsnake")
+
 def install_package_spkg(pkg):
     print "Installing %s..." % pkg
     cmd("mkdir -p $QSNAKE_ROOT/spkg/build")
