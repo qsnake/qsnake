@@ -624,9 +624,6 @@ def build(cpu_count=0):
     # dependencies (those are handled in the get_dependencies() function)
     packages_list = [
             "ipython",
-            "hermes1d",
-            # requires: setupdocs>=1.0, doesn't work without a net...
-            "mayavi",
             "phaml",
             "libqsnake",
             "fipy",
@@ -636,8 +633,6 @@ def build(cpu_count=0):
             "h5py",
             "pytables",
             "nose",
-            "onlinelab",
-            "mesheditorflex",
             ]
     try:
         for pkg in packages_list:
