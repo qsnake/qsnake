@@ -544,6 +544,7 @@ def get_dependencies(pkg):
             "phaml": ["blas", "lapack", "cmake", "numpy", "arpack"],
             "umfpack": ["blas"],
             "jinja2": ["setuptools"],
+            "sphinx": ["docutils", "pygments", "jinja2"],
             }
     deps = []
     for dep in dependency_graph.get(pkg_name, []):
