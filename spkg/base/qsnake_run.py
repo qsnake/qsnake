@@ -380,13 +380,32 @@ def install_package(pkg, install_dependencies=True, force_install=False,
 
     """
     if pkg.startswith("http") or pkg.startswith("www"):
+        # Download from the web:
         remote = True
         import tempfile
         tmpdir = tempfile.mkdtemp()
         cmd("wget --directory-prefix=" + tmpdir + " " + pkg)
         pkg_name = os.path.split(pkg)
         pkg = os.path.join(tmpdir,pkg_name[1])
+    elif pkg == ".":
+        # Install from the current directory, try to guess
+        # how to install it properly:
+        if os.path.exists(expandvars("$CUR/spkg-install")):
+            setup_cpu(cpu_count)
+            try:
+                cmd("cd $CUR; /bin/bash spkg-install")
+            except CmdException:
+                print "Qsnake 'install .' exited with an error."
+        elif os.path.exists(expandvars("$CUR/setup.py")):
+            try:
+                cmd("cd $CUR; python setup.py install")
+            except CmdException:
+                print "Qsnake 'python setup.py install' exited with an error."
+        else:
+            print "Don't know how to install from the current directory."
+        return
     else:
+        # Install the 'pkg' package
         remote = False
         try:
             pkg = pkg_make_absolute(pkg)
