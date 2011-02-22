@@ -31,7 +31,12 @@ Qsnake is not installed. Running systemwide Python.
 Only use this mode to install Qsnake.
 ***************************************************"""
 
-    parser = OptionParser(usage="[options] args")
+    parser = OptionParser(usage="""\
+[options] [commands]
+
+Commands:
+
+  install PACKAGE       installs the package 'PACKAGE'""")
     parser.add_option("-i", "--install",
             action="store", type="str", dest="install", metavar="PACKAGE",
             default="", help="install a spkg package")
@@ -46,25 +51,28 @@ Only use this mode to install Qsnake.
             default=False, help="build Qsnake")
     parser.add_option("-j",
             action="store", type="int", dest="cpu_count", metavar="NCPU",
-            default=0, help="number of cpu to use (0 = all)")
+            default=0, help="number of cpu to use (0 = all), default 0")
     parser.add_option("--shell",
             action="store_true", dest="shell",
             default=False, help="starts a Qsnake shell")
     parser.add_option("-s", "--script",
             action="store", type="str", dest="script", metavar="SCRIPT",
             default=None, help="runs '/bin/bash SCRIPT' in a Qsnake shell")
-    parser.add_option("--python",
-            action="store", type="str", dest="python", metavar="SCRIPT",
-            default=None, help="runs 'python SCRIPT' in a Qsnake shell")
-    parser.add_option("--unpack",
-            action="store", type="str", dest="unpack", metavar="PACKAGE",
-            default=None, help="unpacks the PACKAGE into the 'devel/' dir")
-    parser.add_option("--pack",
-            action="store", type="str", dest="pack", metavar="PACKAGE",
-            default=None, help="creates 'devel/PACKAGE.spkg' from 'devel/PACKAGE'")
-    parser.add_option("--devel-install",
-            action="store", type="str", dest="devel_install", metavar="PACKAGE",
-            default=None, help="installs 'devel/PACKAGE' into Qsnake directly")
+    # Not much used:
+    #parser.add_option("--python",
+    #        action="store", type="str", dest="python", metavar="SCRIPT",
+    #        default=None, help="runs 'python SCRIPT' in a Qsnake shell")
+
+    # These are not used either:
+    #parser.add_option("--unpack",
+    #        action="store", type="str", dest="unpack", metavar="PACKAGE",
+    #        default=None, help="unpacks the PACKAGE into the 'devel/' dir")
+    #parser.add_option("--pack",
+    #        action="store", type="str", dest="pack", metavar="PACKAGE",
+    #        default=None, help="creates 'devel/PACKAGE.spkg' from 'devel/PACKAGE'")
+    #parser.add_option("--devel-install",
+    #        action="store", type="str", dest="devel_install", metavar="PACKAGE",
+    #        default=None, help="installs 'devel/PACKAGE' into Qsnake directly")
     parser.add_option("--create-package",
             action="store", type="str", dest="create_package",
             metavar="PACKAGE", default=None,
@@ -133,44 +141,44 @@ Only use this mode to install Qsnake.
         except CmdException:
             print "Qsnake script exited with an error."
         return
-    if options.python:
-        cmd("cd $CUR; /usr/bin/env python " + options.python)
-        return
-    if options.unpack:
-        pkg = pkg_make_absolute(options.unpack)
-        print "Unpacking '%(pkg)s' into 'devel/'" % {"pkg": pkg}
-        cmd("mkdir -p $QSNAKE_ROOT/devel")
-        cmd("cd $QSNAKE_ROOT/devel; tar xjf %s" % pkg)
-        return
-    if options.pack:
-        dir = options.pack
-        if not os.path.exists(dir):
-            dir = expandvars("$QSNAKE_ROOT/devel/%s" % dir)
-        if not os.path.exists(dir):
-            raise Exception("Unknown package to pack")
-        dir = os.path.split(dir)[1]
-        print "Creating devel/%(dir)s.spkg from devel/%(dir)s" % {"dir": dir}
-        cmd("cd $QSNAKE_ROOT/devel; tar cjf %(dir)s.spkg %(dir)s" % \
-                {"dir": dir})
-        return
-    if options.devel_install:
-        dir = options.devel_install
-        if not os.path.exists(dir):
-            dir = expandvars("$QSNAKE_ROOT/devel/%s" % dir)
-        if not os.path.exists(dir):
-            raise Exception("Unknown package to pack")
-        dir = os.path.normpath(dir)
-        dir = os.path.split(dir)[1]
-        print "Installing devel/%(dir)s into Qsnake" % {"dir": dir}
-        cmd("mkdir -p $QSNAKE_ROOT/spkg/build/")
-        cmd("rm -rf $QSNAKE_ROOT/spkg/build/%(dir)s" % {"dir": dir})
-        cmd("cp -r $QSNAKE_ROOT/devel/%(dir)s $QSNAKE_ROOT/spkg/build/" % \
-                {"dir": dir})
-        setup_cpu(options.cpu_count)
-        cmd("cd $QSNAKE_ROOT/spkg/build/%(dir)s; /bin/bash spkg-install" % \
-                {"dir": dir})
-        cmd("rm -rf $QSNAKE_ROOT/spkg/build/%(dir)s" % {"dir": dir})
-        return
+    #if options.python:
+    #    cmd("cd $CUR; /usr/bin/env python " + options.python)
+    #    return
+    #if options.unpack:
+    #    pkg = pkg_make_absolute(options.unpack)
+    #    print "Unpacking '%(pkg)s' into 'devel/'" % {"pkg": pkg}
+    #    cmd("mkdir -p $QSNAKE_ROOT/devel")
+    #    cmd("cd $QSNAKE_ROOT/devel; tar xjf %s" % pkg)
+    #    return
+    #if options.pack:
+    #    dir = options.pack
+    #    if not os.path.exists(dir):
+    #        dir = expandvars("$QSNAKE_ROOT/devel/%s" % dir)
+    #    if not os.path.exists(dir):
+    #        raise Exception("Unknown package to pack")
+    #    dir = os.path.split(dir)[1]
+    #    print "Creating devel/%(dir)s.spkg from devel/%(dir)s" % {"dir": dir}
+    #    cmd("cd $QSNAKE_ROOT/devel; tar cjf %(dir)s.spkg %(dir)s" % \
+    #            {"dir": dir})
+    #    return
+    #if options.devel_install:
+    #    dir = options.devel_install
+    #    if not os.path.exists(dir):
+    #        dir = expandvars("$QSNAKE_ROOT/devel/%s" % dir)
+    #    if not os.path.exists(dir):
+    #        raise Exception("Unknown package to pack")
+    #    dir = os.path.normpath(dir)
+    #    dir = os.path.split(dir)[1]
+    #    print "Installing devel/%(dir)s into Qsnake" % {"dir": dir}
+    #    cmd("mkdir -p $QSNAKE_ROOT/spkg/build/")
+    #    cmd("rm -rf $QSNAKE_ROOT/spkg/build/%(dir)s" % {"dir": dir})
+    #    cmd("cp -r $QSNAKE_ROOT/devel/%(dir)s $QSNAKE_ROOT/spkg/build/" % \
+    #            {"dir": dir})
+    #    setup_cpu(options.cpu_count)
+    #    cmd("cd $QSNAKE_ROOT/spkg/build/%(dir)s; /bin/bash spkg-install" % \
+    #            {"dir": dir})
+    #    cmd("rm -rf $QSNAKE_ROOT/spkg/build/%(dir)s" % {"dir": dir})
+    #    return
     if options.create_package:
         create_package(options.create_package)
         return
