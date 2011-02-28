@@ -513,10 +513,11 @@ def build(cpu_count=0):
             "fipy",
             "sfepy",
             "sympy",
-            "hdf5",
             "h5py",
             "pytables",
             "nose",
+            "gpaw",
+            "elk",
             ]
     try:
         for pkg in packages_list:

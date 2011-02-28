@@ -416,10 +416,20 @@
         "version": "1.6.9"
     },
     {
-        "dependencies": [],
+        "dependencies": [
+            "hdf5"
+        ],
         "download": "qsnake-spkg",
         "name": "h5py",
         "version": "1.2.1.p1"
+    },
+    {
+        "dependencies": [
+            "cython"
+        ],
+        "download": "qsnake-git",
+        "name": "elk",
+        "version": ""
     },
     {
         "dependencies": [],
