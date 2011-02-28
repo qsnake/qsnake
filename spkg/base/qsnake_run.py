@@ -674,6 +674,12 @@ def verify_database():
     try:
         packages = get_standard_packages()
         dependency_graph = get_dependency_graph()
+        for p in dependency_graph:
+            deps = dependency_graph[p]
+            for p2 in deps:
+                if not p2 in dependency_graph:
+                    msg = "Dependency '%s' of the package '%s' doesn't exist"
+                    raise Exception(msg % (p2, p))
         print "OK"
     except:
         print "Failed."
