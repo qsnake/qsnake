@@ -493,6 +493,22 @@
     },
     {
         "dependencies": [
+            "ase"
+        ],
+        "download": "qsnake-git",
+        "name": "gpaw",
+        "version": ""
+    },
+    {
+        "dependencies": [
+            "python"
+        ],
+        "download": "qsnake-git",
+        "name": "ase",
+        "version": ""
+    },
+    {
+        "dependencies": [
             "curl"
         ],
         "download": "qsnake-spkg",
