@@ -333,12 +333,12 @@ def start_qsnake(debug=False):
 def download_packages():
     print "Downloading standard spkg packages"
     cmd("mkdir -p $QSNAKE_ROOT/spkg/standard")
-    packages = get_standard_packages()
-    for p in packages:
+    spkg, git = get_standard_packages()
+    for p in spkg:
         cmd("cd $QSNAKE_ROOT/spkg/standard; ../base/qsnake-wget %s" % p)
 
-    # FIXME: Special case, it should be handled in some general way:
-    cmd("cd $QSNAKE_ROOT/spkg/standard; qsnake --create-package libqsnake")
+    for p in git:
+        cmd("cd $QSNAKE_ROOT/spkg/standard; qsnake --create-package %s" % p)
 
 def install_package_spkg(pkg):
     print "Installing %s..." % pkg
@@ -656,8 +656,18 @@ def get_standard_packages():
     f = open(expandvars("$QSNAKE_ROOT/spkg/base/packages.json"))
     data = load(f)
     QSNAKE_STANDARD = "http://qsnake.googlecode.com/files"
-    return [QSNAKE_STANDARD + "/" + x["name"] + "-" + x["version"] + ".spkg"
-            for x in data]
+    spkg = []
+    git = []
+    for p in data:
+        download = p["download"]
+        if download == "qsnake-spkg":
+            spkg.append(QSNAKE_STANDARD + "/" + p["name"] + "-" + \
+                    p["version"] + ".spkg")
+        elif download == "qsnake-git":
+            git.append(p["name"])
+        else:
+            raise Exception("Unsupported 'download' field")
+    return spkg, git
 
 def get_dependency_graph():
     from json import load
