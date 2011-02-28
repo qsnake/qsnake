@@ -87,6 +87,10 @@ Commands:
     parser.add_option("--lab",
             action="store_true", dest="run_lab",
             default=False, help="Runs lab(auth=False)")
+    parser.add_option("--verify-database",
+            action="store_true", dest="verify_database",
+            default=False,
+            help="Verifies the package database integrity")
     options, args = parser.parse_args()
     if len(args) == 1:
         arg, = args
@@ -190,6 +194,9 @@ Commands:
         return
     if options.run_lab:
         run_lab(auth=False)
+        return
+    if options.verify_database:
+        verify_database()
         return
 
     if systemwide_python:
@@ -326,7 +333,6 @@ def start_qsnake(debug=False):
 def download_packages():
     print "Downloading standard spkg packages"
     cmd("mkdir -p $QSNAKE_ROOT/spkg/standard")
-    from package_database import get_standard_packages
     packages = get_standard_packages()
     for p in packages:
         cmd("cd $QSNAKE_ROOT/spkg/standard; ../base/qsnake-wget %s" % p)
@@ -498,7 +504,7 @@ def get_dependencies(pkg):
     function.
     """
     pkg_name = pkg_make_relative(pkg)
-    from package_database import dependency_graph
+    dependency_graph = get_dependency_graph()
     deps = []
     for dep in dependency_graph.get(pkg_name, []):
         deps.extend(get_dependencies(dep))
@@ -644,6 +650,36 @@ def command_update():
 def command_list():
     print "List of installed packages:"
     cmd("ls spkg/installed")
+
+def get_standard_packages():
+    from json import load
+    f = open(expandvars("$QSNAKE_ROOT/spkg/base/packages.json"))
+    data = load(f)
+    QSNAKE_STANDARD = "http://qsnake.googlecode.com/files"
+    return [QSNAKE_STANDARD + "/" + x["name"] + "." + x["version"] + ".spkg"
+            for x in data]
+
+def get_dependency_graph():
+    from json import load
+    f = open(expandvars("$QSNAKE_ROOT/spkg/base/packages.json"))
+    data = load(f)
+    QSNAKE_STANDARD = "http://qsnake.googlecode.com/files"
+    graph = {}
+    for p in data:
+        graph[p["name"]] = p["dependencies"]
+    return graph
+
+def verify_database():
+    print "Verifying the package database..."
+    try:
+        packages = get_standard_packages()
+        dependency_graph = get_dependency_graph()
+        print "OK"
+    except:
+        print "Failed."
+        print
+        print "More information about the error:"
+        raise
 
 
 if __name__ == "__main__":
