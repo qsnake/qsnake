@@ -16,6 +16,7 @@ for p in get_standard_packages():
             "name": p,
             "dependencies": dependency_graph.get(p, []),
             "version": version,
+            "download": "qsnake",
             }
     g.append(pkg)
 
