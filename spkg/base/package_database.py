@@ -13,7 +13,7 @@ for p in data:
             "name": p["name"],
             "dependencies": p["dependencies"],
             "version": p["version"],
-            "download": "qsnake-spkg",
+            "download": p["download"],
             }
     g.append(pkg)
 
