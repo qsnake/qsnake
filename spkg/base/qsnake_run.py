@@ -553,20 +553,18 @@ def get_dependencies(pkg):
     deps = make_unique(deps)
     return deps
 
-def get_standard_packages(just_names=False):
+def get_standard_packages():
     """
     Returns the list of standard packages.
 
     just_names ... if True, only the names of the packages are returned
 
     Packages are copied from various sources (see the *_STANDARD variables
-    below).  You can also check (and update) the versions on the web:
-
-    Qsnake: http://qsnake.org/stpack
+    below).
 
     """
 
-    QSNAKE_STANDARD = "http://femhub.org/stpack"
+    QSNAKE_STANDARD = "http://qsnake.googlecode.com/files"
 
     qsnake_packages = [
             "termcap-1.3.1.p1",
@@ -642,12 +640,7 @@ def get_standard_packages(just_names=False):
             "umfpack-5.5.0",
             ]
 
-    if just_names:
-        packages = \
-                [p + ".spkg" for p in qsnake_packages]
-    else:
-        packages = \
-                [QSNAKE_STANDARD + "/" + p + ".spkg" for p in qsnake_packages]
+    packages = [QSNAKE_STANDARD + "/" + p + ".spkg" for p in qsnake_packages]
     return packages
 
 def build(cpu_count=0):
