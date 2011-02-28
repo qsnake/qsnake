@@ -656,7 +656,7 @@ def get_standard_packages():
     f = open(expandvars("$QSNAKE_ROOT/spkg/base/packages.json"))
     data = load(f)
     QSNAKE_STANDARD = "http://qsnake.googlecode.com/files"
-    return [QSNAKE_STANDARD + "/" + x["name"] + "." + x["version"] + ".spkg"
+    return [QSNAKE_STANDARD + "/" + x["name"] + "-" + x["version"] + ".spkg"
             for x in data]
 
 def get_dependency_graph():
