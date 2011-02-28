@@ -484,7 +484,8 @@
     {
         "dependencies": [
             "zlib",
-            "curl"
+            "curl",
+            "python"
         ],
         "download": "qsnake-git",
         "name": "git",
