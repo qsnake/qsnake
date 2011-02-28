@@ -600,7 +600,7 @@ def get_standard_packages():
             "python_daemon-1.5.5",
             "python_psutil-0.1.3",
             "python_tornado-f732f98",
-            "onlinelab-201012222506_c4b2eea",
+            #"onlinelab-201012222506_c4b2eea",
 
             "py-1.3.1",
 
