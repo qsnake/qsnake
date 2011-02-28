@@ -223,15 +223,12 @@ def cmd(s, capture=False):
 
 def create_package(package):
     packages = {
-        "libqsnake":      "git://github.com/hpfem/libqsnake.git",
-        "onlinelab":      "git://github.com/hpfem/qsnake-online-lab.git",
-        "phaml":          "git://github.com/hpfem/phaml.git",
-        "arpack":         "git://github.com/hpfem/arpack.git",
-        "mesheditorflex": "git://github.com/hpfem/mesheditor-flex.git",
-        "cython":         "git://github.com/hpfem/cython.git",
-        "hermes2d":       "git://github.com/hpfem/hermes.git",
-        "elk":            "git://github.com/qsnake/elk.git",
-        "libqsnake":      "git://github.com/qsnake/libqsnake.git",
+        "phaml":          "https://github.com/qsnake/phaml.git",
+        "arpack":         "https://github.com/qsnake/arpack.git",
+        "cython":         "https://github.com/qsnake/cython.git",
+        "hermes2d":       "https://github.com/qsnake/hermes.git",
+        "elk":            "https://github.com/qsnake/elk.git",
+        "libqsnake":      "https://github.com/qsnake/libqsnake.git",
             }
     if package not in packages:
         raise Exception("Unknown package")
