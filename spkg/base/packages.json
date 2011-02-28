@@ -489,6 +489,14 @@
     },
     {
         "dependencies": [
+            "python"
+        ],
+        "download": "qsnake-git",
+        "name": "libqsnake",
+        "version": ""
+    },
+    {
+        "dependencies": [
             "blas"
         ],
         "download": "qsnake-spkg",
