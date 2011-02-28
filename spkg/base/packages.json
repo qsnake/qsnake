@@ -474,10 +474,21 @@
         "version": "201012223301_aabc985"
     },
     {
-        "dependencies": [],
-        "download": "qsnake-spkg",
+        "dependencies": [
+            "gnutls"
+        ],
+        "download": "qsnake-git",
         "name": "curl",
-        "version": "7.21.1"
+        "version": ""
+    },
+    {
+        "dependencies": [
+            "zlib",
+            "curl"
+        ],
+        "download": "qsnake-git",
+        "name": "git",
+        "version": ""
     },
     {
         "dependencies": [
