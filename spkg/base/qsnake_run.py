@@ -508,6 +508,7 @@ def build(cpu_count=0):
     # dependencies (those are handled in the get_dependencies() function)
     packages_list = [
             "ipython",
+            "git",
             "phaml",
             "libqsnake",
             "fipy",
