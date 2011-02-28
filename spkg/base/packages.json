@@ -425,7 +425,9 @@
     },
     {
         "dependencies": [
-            "cython"
+            "cython",
+            "cmake",
+            "numpy"
         ],
         "download": "qsnake-git",
         "name": "elk",
