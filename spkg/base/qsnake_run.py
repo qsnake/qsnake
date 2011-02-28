@@ -229,17 +229,7 @@ def cmd(s, capture=False):
     return output
 
 def create_package(package):
-    packages = {
-        "phaml":          "https://github.com/qsnake/phaml.git",
-        "arpack":         "https://github.com/qsnake/arpack.git",
-        "cython":         "https://github.com/qsnake/cython.git",
-        "hermes2d":       "https://github.com/qsnake/hermes.git",
-        "elk":            "https://github.com/qsnake/elk.git",
-        "libqsnake":      "https://github.com/qsnake/libqsnake.git",
-            }
-    if package not in packages:
-        raise Exception("Unknown package")
-    git_repo = packages[package]
+    git_repo = "https://github.com/qsnake/" + package + ".git"
     a = git_repo.rfind("/") + 1
     b = git_repo.rfind(".git")
     dir_name = git_repo[a:b]
