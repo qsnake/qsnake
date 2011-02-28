@@ -1,3 +1,8 @@
+"""
+Old style package database. This is now converted to packages.json by
+the script at the end of the module. This module is not used anymore.
+"""
+
 dependency_graph = {
         "python": ["termcap", "zlib", "readline", "bzip2", "gnutls",
             "libpng"],
@@ -134,3 +139,28 @@ def get_standard_packages():
 
     packages = [QSNAKE_STANDARD + "/" + p + ".spkg" for p in qsnake_packages]
     return packages
+
+from os.path import split, splitext
+from qsnake_run import extract_name_version
+g = []
+for p in get_standard_packages():
+    _, p = split(p)
+    p, _ = splitext(p)
+    p, version = extract_name_version(p)
+    pkg = {
+            "name": p,
+            "dependencies": dependency_graph.get(p, []),
+            "version": version,
+            }
+    g.append(pkg)
+
+from json import dump
+from StringIO import StringIO
+s = StringIO()
+dump(g, s, sort_keys=True, indent=4)
+s.seek(0)
+s = s.read()
+# Remove the trailing space
+s = s.replace(" \n", "\n")
+f = open("packages.json", "w")
+f.write(s)
