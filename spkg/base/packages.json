@@ -374,9 +374,9 @@
             "numpy",
             "arpack"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "phaml",
-        "version": "201011190816_71974f0"
+        "version": ""
     },
     {
         "dependencies": [],
