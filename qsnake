@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-CUR="`pwd`"   # save the current directory, so can change back after startup
-
+# Save absolute paths to the root and current directories:
+CUR="`pwd`"
 if [ "x$CUR" = "x" ]; then
     echo "**************************************************************"
     echo " Error: the current working directory does not exist. Please  "
@@ -9,16 +9,17 @@ if [ "x$CUR" = "x" ]; then
     echo "**************************************************************"
     exit 1
 fi
-
 QSNAKE_ROOT=`readlink -n "$0" 2> /dev/null` || \
 QSNAKE_ROOT=`realpath    "$0" 2> /dev/null` || \
 QSNAKE_ROOT="$0"
-
 QSNAKE_ROOT="${QSNAKE_ROOT%/*}/"
-
 # Make root absolute:
 cd "$QSNAKE_ROOT"
 QSNAKE_ROOT=`pwd`
+cd "$CUR"
+
+
+# Export them:
 export QSNAKE_ROOT
 export CUR
 
