@@ -239,7 +239,7 @@ def create_package(package):
     tmp = tempfile.mkdtemp()
     print "Using temporary directory:", tmp
     cur = cmd("echo $CUR", capture=True).strip()
-    cmd("cd %s; git clone %s" % (tmp, git_repo))
+    cmd("cd %s; git clone --depth 1 %s" % (tmp, git_repo))
     commit = cmd("cd %s/%s; git rev-parse HEAD" % (tmp, dir_name),
             capture=True).strip()
     sha = commit[:7]
