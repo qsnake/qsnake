@@ -36,7 +36,10 @@ Only use this mode to install Qsnake.
 
 Commands:
 
-  install PACKAGE       installs the package 'PACKAGE'""")
+  update                Updates the downloaded packages
+  install PACKAGE       Installs the package 'PACKAGE'
+  list                  Lists all installed packages
+  test                  Runs the Qsnake testsuite""")
     parser.add_option("-i", "--install",
             action="store", type="str", dest="install", metavar="PACKAGE",
             default="", help="install a spkg package")
@@ -99,6 +102,9 @@ Commands:
             return
         elif arg == "list":
             command_list()
+            return
+        elif arg == "test":
+            run_tests()
             return
         print "Unknown command"
         sys.exit(1)
@@ -294,12 +300,12 @@ def release_binary():
     cur = cmd("echo $CUR", capture=True).strip()
     cmd("mkdir %s/%s" % (tmp, qsnake_dir))
     print "Copying qsnake into the temporary directory..."
-    cmd("cp -r * %s/%s/" % (tmp, qsnake_dir))
+    cmd("cd $QSNAKE_ROOT; cp -r * %s/%s/" % (tmp, qsnake_dir))
     print "Removing source SPKG packages"
     cmd("rm -f %s/%s/spkg/standard/*" % (tmp, qsnake_dir))
     print "Creating a binary tarball"
     cmd("cd %s; tar czf %s.tar.gz %s" % (tmp, qsnake_dir, qsnake_dir))
-    cmd("cp %s/%s.tar.gz ." % (tmp, qsnake_dir))
+    cmd("cd $QSNAKE_ROOT; cp %s/%s.tar.gz ." % (tmp, qsnake_dir))
     print
     print "Package created: %s.tar.gz" % (qsnake_dir)
 
@@ -650,19 +656,15 @@ def extract_name_version_from_path(p):
     return extract_name_version(filename)
 
 def command_update():
-    # This doesn't work, because of the following error:
-    # git-remote-https: relocation error: /usr/lib/libldap_r-2.4.so.2: symbol gnutls_certificate_get_x509_cas, version GNUTLS_1_4 not defined in file libgnutls.so.26 with link time reference
-    # The only solution is to ship our own git version, which we will do in the
-    # future, but for now we just keep this option commented out
-    #print "Updating the git repository"
-    #cmd("git pull https://github.com/qsnake/qsnake.git master")
+    print "Updating the git repository"
+    cmd("cd $QSNAKE_ROOT; git pull https://github.com/qsnake/qsnake.git master")
 
     download_packages()
     print "Done."
 
 def command_list():
     print "List of installed packages:"
-    cmd("ls spkg/installed")
+    cmd("cd $QSNAKE_ROOT; ls spkg/installed")
 
 def get_standard_packages():
     from json import load
@@ -710,6 +712,9 @@ def verify_database():
         print "More information about the error:"
         raise
 
+def run_tests():
+    import qsnake
+    qsnake.test()
 
 if __name__ == "__main__":
     main()
