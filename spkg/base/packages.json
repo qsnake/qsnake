@@ -98,11 +98,12 @@
     },
     {
         "dependencies": [
-            "numpy"
+            "numpy",
+            "umfpack"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "scipy",
-        "version": "0.8"
+        "version": ""
     },
     {
         "dependencies": [],
