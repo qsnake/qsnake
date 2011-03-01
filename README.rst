@@ -12,16 +12,20 @@ Download the git repository::
     git clone https://github.com/qsnake/qsnake.git
     cd qsnake
 
-Download external packages and install minimal qsnake::
+Install prerequisites, on Ubuntu, do::
+
+    sudo apt-get install gcc, g++, gfortran, python, git
+
+Download external packages and install qsnake::
 
     ./qsnake -d
-    ./qsnake install ipython
+    ./qsnake -b
 
 Run qsnake::
 
     ./qsnake
 
-You can install other packages, for example numpy, by doing ``qsnake install
+You can install any package, for example numpy, by doing ``qsnake install
 numpy``.
 
 License
