@@ -83,16 +83,13 @@
         "version": "0.6.3.p4"
     },
     {
-        "dependencies": [
-            "fortran"
-        ],
+        "dependencies": [],
         "download": "qsnake-spkg",
         "name": "lapack",
         "version": "20071123.p1"
     },
     {
         "dependencies": [
-            "fortran",
             "lapack"
         ],
         "download": "qsnake-spkg",
@@ -232,12 +229,6 @@
         "download": "qsnake-spkg",
         "name": "py",
         "version": "1.3.1"
-    },
-    {
-        "dependencies": [],
-        "download": "qsnake-spkg",
-        "name": "fortran",
-        "version": "814646f"
     },
     {
         "dependencies": [],
@@ -387,9 +378,7 @@
         "version": "201011190816_71974f0"
     },
     {
-        "dependencies": [
-            "fortran"
-        ],
+        "dependencies": [],
         "download": "qsnake-spkg",
         "name": "arpack",
         "version": "201011191133_0ea3296"
