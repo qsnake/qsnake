@@ -84,17 +84,17 @@
     },
     {
         "dependencies": [],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "lapack",
-        "version": "20071123.p1"
+        "version": ""
     },
     {
         "dependencies": [
             "lapack"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "blas",
-        "version": "20070724"
+        "version": ""
     },
     {
         "dependencies": [
