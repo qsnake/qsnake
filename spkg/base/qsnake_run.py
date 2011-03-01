@@ -349,7 +349,7 @@ def download_packages():
         cmd("cd $QSNAKE_ROOT/spkg/standard; ../base/qsnake-wget %s" % p)
 
     for p in git:
-        cmd("cd $QSNAKE_ROOT/spkg/standard; qsnake --create-package %s" % p)
+        cmd("cd $QSNAKE_ROOT/spkg/standard; ../../qsnake --create-package %s" % p)
 
 def install_package_spkg(pkg):
     print "Installing %s..." % pkg
