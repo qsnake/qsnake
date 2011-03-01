@@ -252,6 +252,26 @@ def create_package(package):
         print "Preparing the hermes2d package..."
         cmd("cd %s/%s; rm -rf hermes1d hermes3d doc .git" % (tmp, dir_name))
         cmd("cd %s/%s; cp hermes2d/spkg-install ." % (tmp, dir_name))
+    if os.path.exists("%s/%s/spkg-install" % (tmp, dir_name)):
+        print "spkg-install file exists, not doing anything"
+    elif os.path.exists("%s/%s/setup.py" % (tmp, dir_name)):
+        print "spkg-install file doesn't exist, creating one for setup.py"
+        f = open("%s/%s/spkg-install" % (tmp, dir_name), "w")
+        f.write("""
+#! /bin/sh
+
+if [ "$SPKG_LOCAL" = "" ]; then
+   echo "SPKG_LOCAL undefined ... exiting";
+   echo "Maybe run 'qsnake --shell'?"
+   exit 1
+fi
+
+set -e
+
+python setup.py install
+""")
+    else:
+        raise Exception("spkg-install nor setup.py is present")
     datetimestr = time.strftime("%Y%m%d%M%S")
     new_dir_name = "%s-%s_%s" % (package, datetimestr, sha)
     pkg_filename = "%s.spkg" % (new_dir_name)
