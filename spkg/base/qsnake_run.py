@@ -270,6 +270,7 @@ set -e
 
 python setup.py install
 """)
+        f.close()
     else:
         raise Exception("spkg-install nor setup.py is present")
     datetimestr = time.strftime("%Y%m%d%M%S")
