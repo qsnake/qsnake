@@ -49,10 +49,16 @@ if [ "$CC" = "" ]; then
      export CC="gcc"
 fi
 
- # Set the default C++ compiler to g++ if the environment variable
+# Set the default C++ compiler to g++ if the environment variable
 # CXX is not set.
 if [ "$CXX" = "" ]; then
     export CXX="g++"
+fi
+
+# Set the default Fortran compiler to gfortran if the environment variable
+# FC is not set.
+if [ "$FC" = "" ]; then
+    export FC="gfortran"
 fi
 
 if [ "$LD" = "" ]; then
