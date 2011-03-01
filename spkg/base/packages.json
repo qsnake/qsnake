@@ -270,9 +270,9 @@
         "dependencies": [
             "python"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "sympy",
-        "version": "5d78c29"
+        "version": ""
     },
     {
         "dependencies": [],
