@@ -534,16 +534,23 @@ def build(cpu_count=0):
     # Only add the packages that you want to have in Qsnake. Don't add
     # dependencies (those are handled in the get_dependencies() function)
     packages_list = [
-            "ipython",
+            # Basics:
             "git",
-            "phaml",
             "libqsnake",
+
+            # SciPy stack
+            "ipython",
+            "scipy",
+            "sympy",
+            "matplotlib",
+            "h5py",
+
+            # PDE packages:
             "fipy",
             "sfepy",
-            "sympy",
-            "h5py",
-            "pytables",
-            "nose",
+            "phaml",
+
+            # Electronic structure packages:
             "gpaw",
             "elk",
             ]
