@@ -99,7 +99,8 @@
     {
         "dependencies": [
             "numpy",
-            "umfpack"
+            "umfpack",
+            "swig"
         ],
         "download": "qsnake-git",
         "name": "scipy",
