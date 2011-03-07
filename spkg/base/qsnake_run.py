@@ -252,12 +252,6 @@ def create_package(package):
     if os.path.exists("%s/%s/spkg-prepare" % (tmp, dir_name)):
         print "spkg-prepare found, running it..."
         cmd("cd %s/%s; sh spkg-prepare" % (tmp, dir_name))
-    # hermes packages require special handling:
-    if package == "hermes2d":
-        # The spkg-prepare script is in the "hermes2d" subdirectory:
-        print "Preparing the hermes2d package..."
-        cmd("cd %s/%s; rm -rf hermes1d hermes3d doc .git" % (tmp, dir_name))
-        cmd("cd %s/%s; cp hermes2d/spkg-install ." % (tmp, dir_name))
     if os.path.exists("%s/%s/spkg-install" % (tmp, dir_name)):
         print "spkg-install file exists, not doing anything"
     elif os.path.exists("%s/%s/setup.py" % (tmp, dir_name)):
@@ -279,8 +273,7 @@ python setup.py install
         f.close()
     else:
         raise Exception("spkg-install nor setup.py is present")
-    datetimestr = time.strftime("%Y%m%d%M%S")
-    new_dir_name = "%s-%s_%s" % (package, datetimestr, sha)
+    new_dir_name = "%s-%s" % (package, sha)
     pkg_filename = "%s.spkg" % (new_dir_name)
     cmd("cd %s; mv %s %s" % (tmp, dir_name, new_dir_name))
     print "Creating the spkg package..."
