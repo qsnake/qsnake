@@ -9,6 +9,8 @@ from optparse import OptionParser
 import tempfile
 import subprocess
 import time
+import urllib2
+import json
 
 version = "0.9.10.beta1"
 release_date = "November 21, 2010"
@@ -348,7 +350,21 @@ def download_packages():
         cmd("cd $QSNAKE_ROOT/spkg/standard; ../base/qsnake-wget %s" % p)
 
     for p in git:
-        cmd("cd $QSNAKE_ROOT/spkg/standard; ../../qsnake --create-package %s" % p)
+        # Obtain the latest hash from github:
+        url = "http://github.com/api/v2/json/repos/show/qsnake/%s/branches"
+        data = urllib2.urlopen(url % p).read()
+        data = json.loads(data)
+        commit = data["branches"]["master"]
+        sha = commit[:7]
+        path = "$QSNAKE_ROOT/spkg/standard/%s-%s.spkg" % (p, sha)
+        # If we already have this hash, do nothing, otherwise update the
+        # package:
+        if os.path.exists(expandvars(path)):
+            print "Package '%s' (%s) is current, not updating." % (p, sha)
+        else:
+            cmd("rm -f $QSNAKE_ROOT/spkg/standard/%s-*.spkg" % p)
+            cmd("cd $QSNAKE_ROOT/spkg/standard; ../../qsnake --create-package %s" % p)
+            print "\n"
 
 def install_package_spkg(pkg):
     print "Installing %s..." % pkg
