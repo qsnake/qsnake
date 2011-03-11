@@ -244,9 +244,9 @@
             "lapack",
             "blas"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "numpy",
-        "version": "1.5.0"
+        "version": ""
     },
     {
         "dependencies": [
