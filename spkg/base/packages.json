@@ -537,7 +537,8 @@
         "dependencies": [
             "python",
             "numpy",
-            "cython"
+            "cython",
+            "cmake"
         ],
         "download": "qsnake-git",
         "name": "libqsnake",
