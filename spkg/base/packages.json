@@ -26,8 +26,7 @@
         "version": ""
     },
     {
-        "dependencies": [
-        ],
+        "dependencies": [],
         "download": "qsnake-git",
         "name": "openssl",
         "version": ""
@@ -284,8 +283,7 @@
         "version": "2.8.1.p2"
     },
     {
-        "dependencies": [
-        ],
+        "dependencies": [],
         "download": "qsnake-git",
         "name": "cmake_scripts",
         "version": ""
