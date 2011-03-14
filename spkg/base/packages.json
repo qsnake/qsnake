@@ -20,9 +20,9 @@
             "gnutls",
             "libpng"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "python",
-        "version": "2.6.4.p9"
+        "version": ""
     },
     {
         "dependencies": [
