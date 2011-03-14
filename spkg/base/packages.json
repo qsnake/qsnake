@@ -528,7 +528,8 @@
     },
     {
         "dependencies": [
-            "python"
+            "python",
+            "numpy"
         ],
         "download": "qsnake-git",
         "name": "libqsnake",
