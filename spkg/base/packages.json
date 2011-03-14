@@ -18,10 +18,18 @@
             "readline",
             "bzip2",
             "gnutls",
-            "libpng"
+            "libpng",
+            "openssl"
         ],
         "download": "qsnake-git",
         "name": "python",
+        "version": ""
+    },
+    {
+        "dependencies": [
+        ],
+        "download": "qsnake-git",
+        "name": "openssl",
         "version": ""
     },
     {
