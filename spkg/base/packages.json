@@ -18,11 +18,18 @@
             "readline",
             "bzip2",
             "gnutls",
-            "libpng"
+            "libpng",
+            "openssl"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "python",
-        "version": "2.6.4.p9"
+        "version": ""
+    },
+    {
+        "dependencies": [],
+        "download": "qsnake-git",
+        "name": "openssl",
+        "version": ""
     },
     {
         "dependencies": [
@@ -268,10 +275,18 @@
         "version": ""
     },
     {
-        "dependencies": [],
+        "dependencies": [
+            "cmake_scripts"
+        ],
         "download": "qsnake-spkg",
         "name": "cmake",
         "version": "2.8.1.p2"
+    },
+    {
+        "dependencies": [],
+        "download": "qsnake-git",
+        "name": "cmake_scripts",
+        "version": ""
     },
     {
         "dependencies": [],
@@ -520,7 +535,10 @@
     },
     {
         "dependencies": [
-            "python"
+            "python",
+            "numpy",
+            "cython",
+            "cmake"
         ],
         "download": "qsnake-git",
         "name": "libqsnake",

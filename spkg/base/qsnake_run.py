@@ -96,6 +96,10 @@ Commands:
             action="store_true", dest="verify_database",
             default=False,
             help="Verifies the package database integrity")
+    parser.add_option("--erase-binary",
+            action="store_true", dest="erase_binary",
+            default=False,
+            help="Erases all binaries (keeps downloads)")
     options, args = parser.parse_args()
     if len(args) == 1:
         arg, = args
@@ -205,6 +209,9 @@ Commands:
         return
     if options.verify_database:
         verify_database()
+        return
+    if options.erase_binary:
+        erase_binary()
         return
 
     if systemwide_python:
@@ -727,6 +734,13 @@ def verify_database():
         print
         print "More information about the error:"
         raise
+
+def erase_binary():
+    print "Deleting all installed files..."
+    cmd("rm -rf $QSNAKE_ROOT/local")
+    cmd("rm -rf $QSNAKE_ROOT/spkg/build")
+    cmd("rm -rf $QSNAKE_ROOT/spkg/installed")
+    print "    Done."
 
 def run_tests():
     import qsnake
