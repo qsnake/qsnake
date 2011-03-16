@@ -229,7 +229,13 @@ def setup_cpu(cpu_count):
     if cpu_count > 1:
         os.environ["MAKEFLAGS"] = "-j %d" % cpu_count
 
-def cmd(s, capture=False):
+def cmd(s, capture=False, ok_exit_code_list=None):
+    """
+    ok_exit_code_list ... a list of ok exit codes (otherwise cmd() raises an
+    exception)
+    """
+    if ok_exit_code_list is None:
+        ok_exit_code_list = [0]
     s = expandvars(s)
     if capture:
         p = subprocess.Popen(s, shell=True, stdout=subprocess.PIPE,
@@ -239,7 +245,7 @@ def cmd(s, capture=False):
     else:
         output = None
         r = os.system(s)
-    if r != 0:
+    if r not in ok_exit_code_list:
         raise CmdException("Command '%s' failed with err=%d." % (s, r))
     return output
 
