@@ -486,6 +486,14 @@
         "version": "2.6.0"
     },
     {
+        "dependencies": [
+            "pysqlite"
+        ],
+        "download": "qsnake-git",
+        "name": "google_appengine",
+        "version": ""
+    },
+    {
         "dependencies": [],
         "download": "qsnake-spkg",
         "name": "mesheditorflex",
