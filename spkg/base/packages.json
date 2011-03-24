@@ -61,6 +61,24 @@
     },
     {
         "dependencies": [
+            "setuptools"
+        ],
+        "download": "qsnake-git",
+        "name": "werkzeug",
+        "version": ""
+    },
+    {
+        "dependencies": [
+            "setuptools",
+            "jinja2",
+            "werkzeug"
+        ],
+        "download": "qsnake-git",
+        "name": "flask",
+        "version": ""
+    },
+    {
+        "dependencies": [
             "gnutls"
         ],
         "download": "qsnake-spkg",
