@@ -55,9 +55,9 @@
         "dependencies": [
             "setuptools"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "jinja2",
-        "version": "2.1.1.p0"
+        "version": ""
     },
     {
         "dependencies": [
