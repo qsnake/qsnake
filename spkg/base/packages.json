@@ -55,9 +55,27 @@
         "dependencies": [
             "setuptools"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "jinja2",
-        "version": "2.1.1.p0"
+        "version": ""
+    },
+    {
+        "dependencies": [
+            "setuptools"
+        ],
+        "download": "qsnake-git",
+        "name": "werkzeug",
+        "version": ""
+    },
+    {
+        "dependencies": [
+            "setuptools",
+            "jinja2",
+            "werkzeug"
+        ],
+        "download": "qsnake-git",
+        "name": "flask",
+        "version": ""
     },
     {
         "dependencies": [
@@ -484,6 +502,14 @@
         "download": "qsnake-spkg",
         "name": "pysqlite",
         "version": "2.6.0"
+    },
+    {
+        "dependencies": [
+            "pysqlite"
+        ],
+        "download": "qsnake-git",
+        "name": "google_appengine",
+        "version": ""
     },
     {
         "dependencies": [],
