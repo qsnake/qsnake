@@ -250,7 +250,7 @@ def cmd(s, capture=False, ok_exit_code_list=None):
     return output
 
 def create_package(package):
-    git_repo = "https://github.com/qsnake/" + package + ".git"
+    git_repo = "http://github.com/qsnake/" + package + ".git"
     a = git_repo.rfind("/") + 1
     b = git_repo.rfind(".git")
     dir_name = git_repo[a:b]
@@ -686,7 +686,7 @@ def extract_name_version_from_path(p):
 
 def command_update():
     print "Updating the git repository"
-    cmd("cd $QSNAKE_ROOT; git pull https://github.com/qsnake/qsnake.git master")
+    cmd("cd $QSNAKE_ROOT; git pull http://github.com/qsnake/qsnake.git master")
 
     download_packages()
     print "Done."
