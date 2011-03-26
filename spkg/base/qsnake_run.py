@@ -263,6 +263,7 @@ def create_package(package):
     cmd("cd %s; git clone --depth 1 %s" % (tmp, git_repo))
     commit = cmd("cd %s/%s; git rev-parse HEAD" % (tmp, dir_name),
             capture=True).strip()
+    cmd("cd %s/%s; rm -rf .git" % (tmp, dir_name))
     sha = commit[:7]
     if os.path.exists("%s/%s/spkg-prepare" % (tmp, dir_name)):
         print "spkg-prepare found, running it..."
