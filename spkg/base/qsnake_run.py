@@ -399,6 +399,7 @@ def install_package_spkg(pkg):
         cmd("cd $QSNAKE_ROOT/spkg/build/%s-%s; . $QSNAKE_ROOT/local/bin/qsnake-env; ./spkg-install" % (name, version))
     except CmdException:
         raise PackageBuildFailed()
+    cmd("cd $QSNAKE_ROOT/spkg/build; rm -rf %s-%s" % (name, version))
 
 def install_package(pkg, install_dependencies=True, force_install=False,
         cpu_count=0):
