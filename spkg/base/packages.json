@@ -435,17 +435,17 @@
     },
     {
         "dependencies": [],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "hdf5",
-        "version": "1.6.9"
+        "version": ""
     },
     {
         "dependencies": [
             "hdf5"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "h5py",
-        "version": "1.2.1.p1"
+        "version": ""
     },
     {
         "dependencies": [
