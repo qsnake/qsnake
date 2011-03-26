@@ -382,8 +382,11 @@ def download_packages():
 
 def install_package_spkg(pkg):
     print "Installing %s..." % pkg
+    name, version = extract_name_version_from_path(pkg)
     cmd("mkdir -p $QSNAKE_ROOT/spkg/build")
     cmd("mkdir -p $QSNAKE_ROOT/spkg/installed")
+    # Remove the possible old builddir
+    cmd("cd $QSNAKE_ROOT/spkg/build; rm -rf %s-%s" % (name, version))
     try:
         cmd("cd $QSNAKE_ROOT/spkg/build; tar xjf %s" % pkg)
     except CmdException:
@@ -393,7 +396,6 @@ def install_package_spkg(pkg):
         except CmdException:
             print "Not a bz2 nor gzip archive, trying tar..."
             cmd("cd $QSNAKE_ROOT/spkg/build; tar xf %s" % pkg)
-    name, version = extract_name_version_from_path(pkg)
     cmd("cd $QSNAKE_ROOT/spkg/build/%s-%s; chmod +x spkg-install" % (name, version))
     try:
         cmd("cd $QSNAKE_ROOT/spkg/build/%s-%s; . $QSNAKE_ROOT/local/bin/qsnake-env; ./spkg-install" % (name, version))
