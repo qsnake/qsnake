@@ -1,0 +1,11 @@
+Qsnake project is a collection of software, written by a lot of people. This
+file only tracks people who have contributed code to this qsnake git
+repository. To obtain authors of individual packages, consult the respective
+spkg package.
+
+All people who contributed to the Qsnake git repository,
+in the order of date of involvement:
+
+Ondrej Certik <ondrej@certik.cz>
+Brian Granger <ellisonbg@gmail.com>
+Sameer Regmi <regmisk@gmail.com>
