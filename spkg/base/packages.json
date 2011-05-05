@@ -19,7 +19,8 @@
             "bzip2",
             "gnutls",
             "libpng",
-            "openssl"
+            "openssl",
+            "sqlite"
         ],
         "download": "qsnake-git",
         "name": "python",
@@ -487,9 +488,7 @@
         "version": "2.1.1"
     },
     {
-        "dependencies": [
-            "python"
-        ],
+        "dependencies": [],
         "download": "qsnake-spkg",
         "name": "sqlite",
         "version": "3.7.2"
