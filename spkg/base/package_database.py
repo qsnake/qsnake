@@ -1,5 +1,9 @@
 """
-Package database utilities for creating and modifying the database.
+This script reads the packages.json file, checking that the syntax + fields are
+ok, then writes it back, in a formatted style.
+
+You should run this by hand after any modifications to packages.json, to make
+sure that there are no mistakes.
 """
 
 
