@@ -208,7 +208,7 @@ Commands:
         release_binary()
         return
     if options.run_lab:
-        run_lab(auth=False)
+        run_lab()
         return
     if options.verify_database:
         verify_database()
@@ -345,13 +345,7 @@ def start_qsnake(debug=False):
     l += " " * (banner_length - len(l) - 1) + "|"
     banner += l + "\n" + "-" * banner_length + "\n"
 
-    def lab_wrapper(old = False, auth=True, *args, **kwargs):
-        if old:
-            from sagenb.notebook.notebook_object import lab
-            lab(*args, **kwargs)
-        else:
-            run_lab(auth=auth)
-    namespace = {"lab": lab_wrapper}
+    namespace = {"lab": run_lab}
 
     os.environ["IPYTHONDIR"] = expandvars("$DOT_SAGE/ipython")
     os.environ["IPYTHONRC"] = "ipythonrc"
@@ -613,15 +607,21 @@ def wait_for_ctrl_c():
     except KeyboardInterrupt:
         pass
 
-def run_lab(auth=False):
+def run_lab():
     """
     Runs the html notebook.
     """
-    print "Starting Online Lab: Open your web browser at http://localhost:8888/"
+    print "Starting Web GUI: Open your web browser at http://localhost:8888/"
     print "Press CTRL+C to kill it"
     print
-    from IPython.frontend.html.notebook import notebook
-    notebook.main()
+    from IPython.frontend.html.notebook.notebook import NotebookApplication
+    from tornado import httpserver
+    from zmq.eventloop import ioloop
+    application = NotebookApplication()
+    http_server = httpserver.HTTPServer(application)
+    http_server.listen(8888)
+    ioloop.IOLoop.instance().start()
+
 
 def extract_version(package_name):
     """
