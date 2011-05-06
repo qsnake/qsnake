@@ -580,7 +580,17 @@
         "version": "5.5.0"
     },
     {
-        "dependencies": [],
+        "dependencies": [
+            "cmake"
+        ],
+        "download": "qsnake-git",
+        "name": "uuid",
+        "version": ""
+    },
+    {
+        "dependencies": [
+            "uuid"
+        ],
         "download": "qsnake-git",
         "name": "zeromq",
         "version": ""
