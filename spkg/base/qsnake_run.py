@@ -354,7 +354,8 @@ def start_qsnake(debug=False):
 
     if debug:
         print "Starting the main loop..."
-    IPython.Shell.start(user_ns=namespace).mainloop(banner=banner)
+    IPython.frontend.terminal.embed.InteractiveShellEmbed(user_ns=namespace,
+            banner1=banner).mainloop()
 
 def download_packages():
     print "Downloading standard spkg packages"
