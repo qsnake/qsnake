@@ -587,7 +587,8 @@
     },
     {
         "dependencies": [
-            "zeromq"
+            "zeromq",
+            "cython"
         ],
         "download": "qsnake-git",
         "name": "pyzmq",
