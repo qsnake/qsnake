@@ -246,9 +246,9 @@
         "dependencies": [
             "python_pycurl"
         ],
-        "download": "qsnake-spkg",
-        "name": "python_tornado",
-        "version": "f732f98"
+        "download": "qsnake-git",
+        "name": "tornado",
+        "version": ""
     },
     {
         "dependencies": [
