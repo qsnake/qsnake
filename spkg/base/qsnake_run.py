@@ -366,7 +366,11 @@ def download_packages():
     for p in git:
         # Obtain the latest hash from github:
         url = "http://github.com/api/v2/json/repos/show/qsnake/%s/branches"
-        data = urllib2.urlopen(url % p).read()
+        try:
+            data = urllib2.urlopen(url % p).read()
+        except urllib2.HTTPError:
+            print "Can't open the url:", url % p
+            raise
         data = json.loads(data)
         commit = data["branches"]["master"]
         sha = commit[:7]
