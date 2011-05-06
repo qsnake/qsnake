@@ -12,8 +12,8 @@ import time
 import urllib2
 import json
 
-version = "0.9.10.beta1"
-release_date = "November 21, 2010"
+version = "0.9.11"
+release_date = "May 6, 2011"
 
 class CmdException(Exception):
     pass
