@@ -603,23 +603,13 @@ def wait_for_ctrl_c():
 
 def run_lab(auth=False):
     """
-    Runs the online lab.
+    Runs the html notebook.
     """
-    print "Starting Online Lab: Open your web browser at http://localhost:8000/"
+    print "Starting Online Lab: Open your web browser at http://localhost:8888/"
     print "Press CTRL+C to kill it"
     print
-
-    if auth:
-        cmd("onlinelab core start --home=$SPKG_LOCAL/share/onlinelab/core-home")
-    else:
-        cmd("onlinelab core start --no-auth --home=$SPKG_LOCAL/share/onlinelab/core-home")
-
-    cmd("onlinelab service start --home=$SPKG_LOCAL/share/onlinelab/service-home")
-    try:
-        wait_for_ctrl_c()
-    finally:
-        cmd("onlinelab core stop --home=$SPKG_LOCAL/share/onlinelab/core-home")
-        cmd("onlinelab service stop --home=$SPKG_LOCAL/share/onlinelab/service-home")
+    from IPython.frontend.html.notebook import notebook
+    notebook.main()
 
 def extract_version(package_name):
     """
