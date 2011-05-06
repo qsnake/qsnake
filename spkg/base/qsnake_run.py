@@ -42,6 +42,9 @@ Commands:
   install PACKAGE       Installs the package 'PACKAGE'
   list                  Lists all installed packages
   test                  Runs the Qsnake testsuite""")
+    parser.add_option("--version",
+            action="store_true", dest="version",
+            default=False, help="print Qsnake version and exit")
     parser.add_option("-i", "--install",
             action="store", type="str", dest="install", metavar="PACKAGE",
             default="", help="install a spkg package")
@@ -88,18 +91,18 @@ Commands:
             help="upload 'PACKAGE.spkg' from the current directory to the server (for Qsnake developers only)")
     parser.add_option("--release-binary",
             action="store_true", dest="release_binary",
-            default=False, help="Creates a binary release using the current state (for Qsnake developers only)")
+            default=False, help="creates a binary release using the current state (for Qsnake developers only)")
     parser.add_option("--lab",
             action="store_true", dest="run_lab",
-            default=False, help="Runs lab(auth=False)")
+            default=False, help="runs lab()")
     parser.add_option("--verify-database",
             action="store_true", dest="verify_database",
             default=False,
-            help="Verifies the package database integrity")
+            help="verifies the package database integrity")
     parser.add_option("--erase-binary",
             action="store_true", dest="erase_binary",
             default=False,
-            help="Erases all binaries (keeps downloads)")
+            help="erases all binaries (keeps downloads)")
     options, args = parser.parse_args()
     if len(args) == 1:
         arg, = args
@@ -213,6 +216,9 @@ Commands:
     if options.erase_binary:
         erase_binary()
         return
+    if options.version:
+        show_version()
+        return
 
     if systemwide_python:
         parser.print_help()
@@ -317,6 +323,10 @@ def release_binary():
     cmd("cd $QSNAKE_ROOT; cp %s/%s.tar.gz ." % (tmp, qsnake_dir))
     print
     print "Package created: %s.tar.gz" % (qsnake_dir)
+
+def show_version():
+    s = "Qsnake Version %s, Release Date: %s" % (version, release_date)
+    print s
 
 def start_qsnake(debug=False):
     if debug:
