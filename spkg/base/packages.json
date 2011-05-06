@@ -576,5 +576,19 @@
         "download": "qsnake-spkg",
         "name": "umfpack",
         "version": "5.5.0"
+    },
+    {
+        "dependencies": [],
+        "download": "qsnake-git",
+        "name": "zeromq",
+        "version": ""
+    },
+    {
+        "dependencies": [
+            "zeromq"
+        ],
+        "download": "qsnake-git",
+        "name": "pyzmq",
+        "version": ""
     }
 ]
