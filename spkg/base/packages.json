@@ -157,11 +157,13 @@
     },
     {
         "dependencies": [
-            "python"
+            "python",
+            "tornado",
+            "pyzmq"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "ipython",
-        "version": "bzr1174"
+        "version": ""
     },
     {
         "dependencies": [],
