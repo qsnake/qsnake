@@ -45,6 +45,9 @@ Commands:
     parser.add_option("--version",
             action="store_true", dest="version",
             default=False, help="print Qsnake version and exit")
+    parser.add_option("-v", "--verbose",
+            action="store_true", dest="verbose",
+            default=False, help="Make Qsnake verbose")
     parser.add_option("-i", "--install",
             action="store", type="str", dest="install", metavar="PACKAGE",
             default="", help="install a spkg package")
@@ -104,6 +107,10 @@ Commands:
             default=False,
             help="erases all binaries (keeps downloads)")
     options, args = parser.parse_args()
+
+    if options.verbose:
+        global global_cmd_echo
+        global_cmd_echo = True
     if len(args) == 1:
         arg, = args
         if arg == "update":
@@ -235,14 +242,19 @@ def setup_cpu(cpu_count):
     if cpu_count > 1:
         os.environ["MAKEFLAGS"] = "-j %d" % cpu_count
 
-def cmd(s, capture=False, ok_exit_code_list=None, echo=True):
+# If this variable is True, "cmd" will echo each command. It'd be nice to
+# refactor this somehow, so that we don't need this global variable. This
+# variable is set to True if the user passes the "-v" switch to qsnake:
+global_cmd_echo = False
+
+def cmd(s, capture=False, ok_exit_code_list=None, echo=False):
     """
     ok_exit_code_list ... a list of ok exit codes (otherwise cmd() raises an
     exception)
     """
     if ok_exit_code_list is None:
         ok_exit_code_list = [0]
-    if echo:
+    if echo or global_cmd_echo:
         print s
     s = expandvars(s)
     if capture:
