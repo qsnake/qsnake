@@ -12,7 +12,14 @@ Download the git repository::
     git clone https://github.com/qsnake/qsnake.git
     cd qsnake
 
-Install prerequisites, on Ubuntu, do::
+Install prerequisites:
+
+* gfortran (>= 4.4, due to the ``iso_c_binding`` module)
+* gcc, g++ (>= 4.2 should be enough)
+* python (>= 2.5 should work)
+* git (just make sure it has the ``http`` support)
+
+On recent Ubuntu, you can just do::
 
     sudo apt-get install gcc, g++, gfortran, python, git
 
