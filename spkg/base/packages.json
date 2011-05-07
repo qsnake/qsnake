@@ -283,9 +283,9 @@
             "python",
             "numpy"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "matplotlib",
-        "version": "0.99.1.p4"
+        "version": ""
     },
     {
         "dependencies": [
