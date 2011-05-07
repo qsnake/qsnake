@@ -235,13 +235,15 @@ def setup_cpu(cpu_count):
     if cpu_count > 1:
         os.environ["MAKEFLAGS"] = "-j %d" % cpu_count
 
-def cmd(s, capture=False, ok_exit_code_list=None):
+def cmd(s, capture=False, ok_exit_code_list=None, echo=True):
     """
     ok_exit_code_list ... a list of ok exit codes (otherwise cmd() raises an
     exception)
     """
     if ok_exit_code_list is None:
         ok_exit_code_list = [0]
+    if echo:
+        print s
     s = expandvars(s)
     if capture:
         p = subprocess.Popen(s, shell=True, stdout=subprocess.PIPE,
@@ -366,7 +368,7 @@ def start_qsnake(debug=False):
 def download_packages():
     print "Downloading standard spkg packages"
     cmd("mkdir -p $QSNAKE_ROOT/spkg/standard")
-    spkg, git = get_standard_packages()
+    spkg, git, provided = get_standard_packages()
     for p in spkg:
         cmd("cd $QSNAKE_ROOT/spkg/standard; ../base/qsnake-wget %s" % p)
 
@@ -498,6 +500,8 @@ def install_package(pkg, install_dependencies=True, force_install=False,
         rmtree(tmpdir)
 
 def is_installed(pkg):
+    if pkg in get_system_packages():
+        return True
     pkg = pkg_make_relative(pkg)
     candidates = glob(expandvars("$QSNAKE_ROOT/spkg/installed/%s" % pkg))
     if len(candidates) == 1:
@@ -557,10 +561,15 @@ def get_dependencies(pkg):
     For simplicity, the dependency graph is currently hardwired in this
     function.
     """
+    provided = get_system_packages()
+    if pkg in provided:
+        return []
     pkg_name = pkg_make_relative(pkg)
     dependency_graph = get_dependency_graph()
     deps = []
     for dep in dependency_graph.get(pkg_name, []):
+        if dep in provided:
+            continue
         deps.extend(get_dependencies(dep))
         deps.append(dep)
     deps = make_unique(deps)
@@ -706,6 +715,23 @@ def command_list():
     print "List of installed packages:"
     cmd("cd $QSNAKE_ROOT; ls spkg/installed")
 
+def get_system_packages():
+    """get a dict by platform of packages provided by the system."""
+    d = {}
+    d['darwin'] = [
+        'gnutls',
+        'openssl',
+        'termcap',
+        'zlib',
+        'bzip2',
+        'sqlite',
+        'uuid',
+        'blas',
+        'lapack',
+        'curl'
+    ]
+    return d.get(sys.platform, [])
+
 def get_standard_packages():
     from json import load
     f = open(expandvars("$QSNAKE_ROOT/spkg/base/packages.json"))
@@ -713,7 +739,11 @@ def get_standard_packages():
     QSNAKE_STANDARD = "http://qsnake.googlecode.com/files"
     spkg = []
     git = []
+    provided = get_system_packages()
     for p in data:
+        if p['name'] in provided:
+            print 'system provided: '+p['name']
+            continue
         download = p["download"]
         if download == "qsnake-spkg":
             spkg.append(QSNAKE_STANDARD + "/" + p["name"] + "-" + \
@@ -722,7 +752,7 @@ def get_standard_packages():
             git.append(p["name"])
         else:
             raise Exception("Unsupported 'download' field")
-    return spkg, git
+    return spkg, git, provided
 
 def get_dependency_graph():
     from json import load
