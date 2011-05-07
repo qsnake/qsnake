@@ -9,6 +9,10 @@ fi
 export SPKG_LOCAL="$QSNAKE_ROOT/local"
 export PATH="$QSNAKE_ROOT:$SPKG_LOCAL/bin:$PATH"
 export LD_LIBRARY_PATH="$SPKG_LOCAL/lib/:$LD_LIBRARY_PATH"
+if [ "$(uname)" = "Darwin" ]; then
+    export DYLD_LIBRARY_PATH="$SPKG_LOCAL/lib/:$DYLD_LIBRARY_PATH"
+fi
+
 if [ "$LIBRARY_PATH" = "" ]; then
     # It is important to *not* have ":" at the end of the path, otherwise gcc
     # fails to run properly:
