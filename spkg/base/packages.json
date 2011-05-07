@@ -36,9 +36,9 @@
         "dependencies": [
             "python"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "cython",
-        "version": "201012090206_a60b316"
+        "version": ""
     },
     {
         "dependencies": [],
