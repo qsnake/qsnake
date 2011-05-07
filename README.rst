@@ -7,33 +7,83 @@ interface.
 Installation
 ------------
 
-Download the git repository::
+Release
+~~~~~~~
 
-    git clone https://github.com/qsnake/qsnake.git
-    cd qsnake
+Download the source package from:
+
+https://github.com/qsnake/qsnake/archives/master
 
 Install prerequisites:
 
 * gfortran (>= 4.4, due to the ``iso_c_binding`` module)
 * gcc, g++ (>= 4.2 should be enough)
 * python (>= 2.5 should work)
+
+On recent Ubuntu, you can just do::
+
+    sudo apt-get install gcc, g++, gfortran, python
+
+and::
+
+    tar xf qsnake-0.9.11.tar
+    cd qsnake-0.9.11
+    ./qsnake -b
+
+Development Version
+~~~~~~~~~~~~~~~~~~~
+
+Besides the prerequisites above, also install:
+
 * git (just make sure it has the ``http`` support)
 
 On recent Ubuntu, you can just do::
 
-    sudo apt-get install gcc, g++, gfortran, python, git
+    sudo apt-get install git
 
-Download external packages and install qsnake::
+Download the git repository::
+
+    git clone https://github.com/qsnake/qsnake.git
+    cd qsnake
+
+Download external packages::
 
     ./qsnake -d
+
+Now you have an equivalent source package as in the "Release" section (except
+with all the recent updates). Install qsnake as usual using::
+
     ./qsnake -b
+
+Tip
+~~~
+
+Add the ``qsnake`` executable into your ``$PATH``, for example by::
+
+    cd ~/usr/bin
+    ln -s ~/repos/qsnake/qsnake .
+    export PATH=$PATH:$HOME/usr/bin
+
+And just use ``qsnake`` from now on.
+
+
+Usage
+-----
 
 Run qsnake::
 
-    ./qsnake
+    qsnake
 
+Launch web GUI::
+
+    qsnake --lab
+
+or run lab() from within qsnake in a terminal.
 You can install any package, for example numpy, by doing ``qsnake install
-numpy``.
+numpy``. You can develop in the Qsnake environment with::
+
+    qsnake --shell
+
 
 License
 -------
