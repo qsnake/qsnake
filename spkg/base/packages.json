@@ -603,5 +603,11 @@
         "download": "qsnake-git",
         "name": "pyzmq",
         "version": ""
+    },
+    {
+        "dependencies": [],
+        "download": "qsnake-git",
+        "name": "gfortran-osx",
+        "version": ""
     }
 ]
