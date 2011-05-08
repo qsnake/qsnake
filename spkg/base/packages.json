@@ -201,9 +201,9 @@
         "dependencies": [
             "libgpg_error"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "libgcrypt",
-        "version": "1.4.3.p2"
+        "version": ""
     },
     {
         "dependencies": [
