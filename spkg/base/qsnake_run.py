@@ -803,6 +803,7 @@ def erase_binary():
 
 def run_tests():
     import qsnake
+    os.environ["MPLCONFIGDIR"] = expandvars("$QSNAKE_ROOT/spkg/base/matplotlib")
     qsnake.test()
 
 if __name__ == "__main__":
