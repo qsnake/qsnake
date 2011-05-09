@@ -605,6 +605,15 @@
         "version": ""
     },
     {
+        "dependencies": [
+            "python",
+            "setuptools"
+        ],
+        "download": "qsnake-git",
+        "name": "joblib",
+        "version": ""
+    },
+    {
         "dependencies": [],
         "download": "qsnake-git",
         "name": "gfortran-osx",
