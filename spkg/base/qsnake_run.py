@@ -119,6 +119,9 @@ Commands:
         elif arg == "list":
             command_list()
             return
+        elif arg == "develop":
+            command_develop()
+            return
         elif arg == "test":
             run_tests()
             return
@@ -726,6 +729,11 @@ def command_update():
 def command_list():
     print "List of installed packages:"
     cmd("cd $QSNAKE_ROOT; ls spkg/installed")
+
+def command_develop():
+    print "Adding the current directory into qsnake.pth file:"
+    cmd("echo $CUR >> $SPKG_LOCAL/lib/python/site-packages/qsnake.pth",
+            echo=True)
 
 def get_system_packages():
     """get a dict by platform of packages provided by the system."""
