@@ -41,7 +41,8 @@ Commands:
   update                Updates the downloaded packages
   install PACKAGE       Installs the package 'PACKAGE'
   list                  Lists all installed packages
-  test                  Runs the Qsnake testsuite""")
+  test                  Runs the Qsnake testsuite
+  develop               Equivalent of 'setup.py develop'""")
     parser.add_option("--version",
             action="store_true", dest="version",
             default=False, help="print Qsnake version and exit")
