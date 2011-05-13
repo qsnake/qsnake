@@ -3,6 +3,8 @@
 # Multiplatform wget emulation
 
 if [ `uname` = 'Darwin' ]; then
+    # Curl doesn't print the downloaded file by default
+    echo "Downloading $@"
     WGET="curl -O"
 else
     WGET="wget -nc"
