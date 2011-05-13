@@ -1,11 +1,21 @@
 #! /bin/sh
 
-# Multiplatform wget emulation
+# Multiplatform wget -nc emulation
 
-if [ `uname` = 'Darwin' ]; then
-    # Curl doesn't print the downloaded file by default
-    echo "Downloading $@"
-    WGET="curl -O"
+if [ -z "$(which wget)" ]; then
+    wgetnc() {
+        # emulate wget -nc with curl
+        fname="$(echo $@ | awk -F / '{ print $NF }')"
+        if [ -f "$fname" ]; then
+            echo "File '$fname' already there; not retrieving."
+        else
+            # Curl doesn't print the downloaded file by default
+            echo "Downloading $@"
+            curl -O $@
+        fi
+        echo
+    }
+    WGET="wgetnc"
 else
     WGET="wget -nc"
 fi
