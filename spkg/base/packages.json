@@ -575,9 +575,9 @@
         "dependencies": [
             "blas"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "umfpack",
-        "version": "5.5.0"
+        "version": ""
     },
     {
         "dependencies": [
