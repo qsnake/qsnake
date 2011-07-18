@@ -19,10 +19,11 @@ Install prerequisites:
 * gfortran (>= 4.4, due to the ``iso_c_binding`` module)
 * gcc, g++ (>= 4.2 should be enough)
 * python (>= 2.5 should work)
+* make (any version should work)
 
 On recent Ubuntu, you can just do::
 
-    sudo apt-get install gcc, g++, gfortran, python
+    sudo apt-get install gcc, g++, gfortran, python, make
 
 and::
 
