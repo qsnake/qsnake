@@ -23,7 +23,7 @@ Install prerequisites:
 
 On recent Ubuntu, you can just do::
 
-    sudo apt-get install gcc, g++, gfortran, python, make
+    sudo apt-get install gcc g++ gfortran python make
 
 and::
 
