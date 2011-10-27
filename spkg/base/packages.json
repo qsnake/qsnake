@@ -87,16 +87,20 @@
         "version": "1.1.4.p7"
     },
     {
-        "dependencies": [],
-        "download": "qsnake-spkg",
+        "dependencies": [
+            "setuptools"
+        ],
+        "download": "qsnake-git",
         "name": "docutils",
-        "version": "0.5.p0"
+        "version": ""
     },
     {
-        "dependencies": [],
-        "download": "qsnake-spkg",
+        "dependencies": [
+            "setuptools"
+        ],
+        "download": "qsnake-git",
         "name": "pygments",
-        "version": "0.11.1.p0"
+        "version": ""
     },
     {
         "dependencies": [
@@ -104,9 +108,9 @@
             "pygments",
             "jinja2"
         ],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "sphinx",
-        "version": "0.6.3.p4"
+        "version": ""
     },
     {
         "dependencies": [],
