@@ -641,7 +641,8 @@ def run_lab():
     print
     from IPython.frontend.html.notebook.notebookapp import NotebookApp
     app = NotebookApp()
-    app.initialize("")
+    # This option enables Matplotlib:
+    app.initialize(["--pylab=inline"])
     app.start()
 
 
