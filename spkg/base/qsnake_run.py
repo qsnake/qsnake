@@ -632,27 +632,17 @@ def wait_for_ctrl_c():
     except KeyboardInterrupt:
         pass
 
-def run_lab(open_browser=False):
+def run_lab():
     """
     Runs the html notebook.
-
-    open_browser ... if True, opens a browser window
     """
     print "Starting Web GUI: Open your web browser at http://localhost:8888/"
     print "Press CTRL+C to kill it"
     print
-    from IPython.frontend.html.notebook.notebook import NotebookApplication
-    from tornado import httpserver
-    from zmq.eventloop import ioloop
-    application = NotebookApplication()
-    http_server = httpserver.HTTPServer(application)
-    http_server.listen(8888)
-    if open_browser:
-        # This should be executed after the notebook starts, but I don't know
-        # how to do it, as tornado only returns once it ends:
-        import webbrowser
-        webbrowser.open_new("http://localhost:8888/")
-    ioloop.IOLoop.instance().start()
+    from IPython.frontend.html.notebook.notebookapp import NotebookApp
+    app = NotebookApp()
+    app.initialize("")
+    app.start()
 
 
 def extract_version(package_name):
