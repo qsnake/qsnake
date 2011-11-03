@@ -64,10 +64,10 @@ Commands:
     parser.add_option("-j",
             action="store", type="int", dest="cpu_count", metavar="NCPU",
             default=0, help="number of cpu to use (0 = all), default 0")
-    parser.add_option("--shell",
+    parser.add_option("-s", "--shell",
             action="store_true", dest="shell",
             default=False, help="starts a Qsnake shell")
-    parser.add_option("-s", "--script",
+    parser.add_option("--script",
             action="store", type="str", dest="script", metavar="SCRIPT",
             default=None, help="runs '/bin/bash SCRIPT' in a Qsnake shell")
     # Not much used:
