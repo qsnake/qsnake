@@ -747,7 +747,6 @@ def get_system_packages():
         'bzip2',
         'sqlite',
         'uuid',
-        'blas',
         'lapack',
         'curl'
     ]

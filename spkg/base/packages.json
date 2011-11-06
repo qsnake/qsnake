@@ -113,17 +113,9 @@
         "version": ""
     },
     {
-        "dependencies": [
-            "blas"
-        ],
-        "download": "qsnake-git",
-        "name": "lapack",
-        "version": ""
-    },
-    {
         "dependencies": [],
         "download": "qsnake-git",
-        "name": "blas",
+        "name": "lapack",
         "version": ""
     },
     {
@@ -273,8 +265,7 @@
     {
         "dependencies": [
             "python",
-            "lapack",
-            "blas"
+            "lapack"
         ],
         "download": "qsnake-git",
         "name": "numpy",
@@ -409,7 +400,6 @@
     },
     {
         "dependencies": [
-            "blas",
             "lapack",
             "cmake",
             "numpy",
@@ -576,9 +566,7 @@
         "version": ""
     },
     {
-        "dependencies": [
-            "blas"
-        ],
+        "dependencies": [],
         "download": "qsnake-git",
         "name": "umfpack",
         "version": ""
