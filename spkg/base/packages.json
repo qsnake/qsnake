@@ -113,15 +113,15 @@
         "version": ""
     },
     {
-        "dependencies": [],
+        "dependencies": [
+            "blas"
+        ],
         "download": "qsnake-git",
         "name": "lapack",
         "version": ""
     },
     {
-        "dependencies": [
-            "lapack"
-        ],
+        "dependencies": [],
         "download": "qsnake-git",
         "name": "blas",
         "version": ""
