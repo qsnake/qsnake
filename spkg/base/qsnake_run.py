@@ -376,12 +376,11 @@ def start_qsnake(debug=False):
 
     if debug:
         print "Starting the main loop..."
-    __c = IPython.config.loader.Config()
-    __c.InteractiveShell.confirm_exit = False
-    # The underscores are needed as a workaround for a bug in IPython:
-    # https://github.com/ipython/ipython/issues/954
-    IPython.frontend.terminal.embed.InteractiveShellEmbed(config=__c,
-            user_ns=namespace, banner1=banner).mainloop()
+    c = IPython.config.loader.Config()
+    c.InteractiveShell.confirm_exit = False
+    IPython.frontend.terminal.embed.InteractiveShellEmbed(config=c,
+            user_ns=namespace, banner1=banner).mainloop(local_ns={},
+                    global_ns={})
 
 def download_packages():
     print "Downloading standard spkg packages"
