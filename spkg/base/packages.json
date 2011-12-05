@@ -413,9 +413,9 @@
     },
     {
         "dependencies": [],
-        "download": "qsnake-spkg",
+        "download": "qsnake-git",
         "name": "arpack",
-        "version": "201011191133_0ea3296"
+        "version": ""
     },
     {
         "dependencies": [
