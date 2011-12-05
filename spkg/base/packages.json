@@ -440,7 +440,8 @@
     },
     {
         "dependencies": [
-            "hdf5"
+            "hdf5",
+            "numpy"
         ],
         "download": "qsnake-git",
         "name": "h5py",
