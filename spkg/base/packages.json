@@ -113,7 +113,9 @@
         "version": ""
     },
     {
-        "dependencies": [],
+        "dependencies": [
+            "cmake"
+        ],
         "download": "qsnake-git",
         "name": "lapack",
         "version": ""
