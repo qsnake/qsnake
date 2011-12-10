@@ -379,8 +379,7 @@ def start_qsnake(debug=False):
     c = IPython.config.loader.Config()
     c.InteractiveShell.confirm_exit = False
     IPython.frontend.terminal.embed.InteractiveShellEmbed(config=c,
-            user_ns=namespace, banner1=banner).mainloop(local_ns={},
-                    global_ns={})
+            user_ns=namespace, banner1=banner).mainloop(local_ns={})
 
 def download_packages():
     print "Downloading standard spkg packages"
