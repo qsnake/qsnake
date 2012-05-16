@@ -20,11 +20,10 @@ Install prerequisites:
 * gcc, g++ (>= 4.2 should be enough)
 * python (>= 2.5 should work)
 * make (any version should work)
-* autoconf
 
 On recent Ubuntu, you can just do::
 
-    sudo apt-get install gcc g++ gfortran python make autoconf
+    sudo apt-get install gcc g++ gfortran python make
 
 and::
 
