@@ -390,14 +390,16 @@ def download_packages():
 
     for p in git:
         # Obtain the latest hash from github:
-        url = "http://github.com/api/v2/json/repos/show/qsnake/%s/branches"
+        url = "https://api.github.com/repos/qsnake/%s/branches"
         try:
             data = urllib2.urlopen(url % p).read()
         except urllib2.HTTPError:
             print "Can't open the url:", url % p
             raise
         data = json.loads(data)
-        commit = data["branches"]["master"]
+        i = 0
+        while data[i]["name"] != "master": i += 1
+        commit = data[i]["commit"]["sha"]
         sha = commit[:7]
         path = "$QSNAKE_ROOT/spkg/standard/%s-%s.spkg" % (p, sha)
         # If we already have this hash, do nothing, otherwise update the
